@@ -4,5 +4,8 @@ export const errorHandler = ( error,req,res,next)=>{
     const statusCode=error.statusCode || 500
     const errorMessage=error.message  || " Internal server error"
 
-    res.status(statusCode).json({error : errorMessage})
+    res.status(statusCode).json({
+        message : errorMessage,
+        error: process.env.NODE_ENV === "development" ? error : {}
+    })
 }
